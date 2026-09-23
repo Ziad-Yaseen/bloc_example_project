@@ -10,6 +10,4 @@ abstract class CounterStates extends Equatable {
 class CounterState extends CounterStates {
   final int counter;
   const CounterState(this.counter);
-
-
 }
