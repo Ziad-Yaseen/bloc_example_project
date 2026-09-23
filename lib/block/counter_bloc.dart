@@ -15,6 +15,6 @@ class CounterBloc extends Bloc<CounterEvents, CounterStates> {
 
   void _decrementCounter(CounterEvents event, Emitter<CounterStates> emit) {
     final currentState = state as CounterState;
-    emit(CounterState(currentState.counter + 1));
+    emit(CounterState(currentState.counter - 1));
   }
 }
