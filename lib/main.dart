@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc_example_project/block/counter_bloc.dart';
 import 'package:bloc_example_project/block/counter_states.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +40,38 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: .center,
           children: [
             const Text('You have pushed the button this many times:'),
-            BlocBuilder<CounterBloc, CounterStates>(
+            // BlocBuilder<CounterBloc, CounterStates>(
+            //   builder: (context, state) {
+            //     final currentState = state as CounterState;
+            //     return Text(
+            //       currentState.counter.toString(),
+            //       style: Theme.of(context).textTheme.headlineMedium,
+            //     );
+            //   },
+            // ),
+
+            // BlocListener<CounterBloc, CounterStates>(
+            //   listener: (context, state) {
+            //     if (state is CounterState) {
+            //       log('State changed with value ${state.counter}');
+            //     }
+            //   },
+            //   child: const SizedBox(),
+            // ),
+            BlocConsumer<CounterBloc, CounterStates>(
+              listener: (context, state) {
+                if (state is CounterState) {
+                  log('State changed with value ${state.counter}');
+                  if (state.counter > 5) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Counter Is greater than 5'),
+                      ),
+                    );
+                  }
+                }
+              },
+
               builder: (context, state) {
                 final currentState = state as CounterState;
                 return Text(
@@ -47,6 +80,7 @@ class MyHomePage extends StatelessWidget {
                 );
               },
             ),
+
             const SizedBox(height: 200),
             TextButton(
               onPressed: () {
