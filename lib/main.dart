@@ -1,5 +1,4 @@
 import 'package:bloc_example_project/block/counter_bloc.dart';
-import 'package:bloc_example_project/block/counter_events.dart';
 import 'package:bloc_example_project/block/counter_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +50,7 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(height: 200),
             TextButton(
               onPressed: () {
-                BlocProvider.of<CounterBloc>(context).add(Decrement());
+                context.read<CounterBloc>().decrementCounter();
               },
               child: const Text('Decrement'),
             ),
@@ -60,7 +59,7 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          BlocProvider.of<CounterBloc>(context).add(Increment());
+          context.read<CounterBloc>().incrementCounter();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
